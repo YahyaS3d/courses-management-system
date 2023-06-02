@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Course</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/edit-course.js"></script>
+</head>
+<body>
+    <h1>Edit Course</h1>
+    <form id="edit-course-form">
+        <input type="text" name="courseId" placeholder="Course ID" required>
+        <input type="text" name="courseName" placeholder="Course Name" required>
+        <input type="text" name="lecturerName" placeholder="Lecturer's Name" required>
+        <button type="submit">Update Course</button>
+    </form>
+    <button id="back-to-list">Back to Course List</button>
+
+    <script>
+        var courseId = window.location.pathname.split('/').pop();
+        $(document).ready(function() {
+            $.ajax({
+                type: 'GET',
+                url: `/getCourse/${courseId}`,
+                success: function(response) {
+                    $('input[name="courseId"]').val(response.courseId);
+                    $('input[name="courseName"]').val(response.courseName);
+                    $('input[name="lecturerName"]').val(response.lecturerName);
+                },
+                error: function() {
+                    console.log('Failed to load course details');
+                }
+            });
+        });
+
+        // Handle form submission
+        $('#edit-course-form').submit(function(event) {
+            event.preventDefault();
+
+            var updatedCourseId = $('input[name="courseId"]').val();
+            var updatedCourseName = $('input[name="courseName"]').val();
+            var updatedLecturerName = $('input[name="lecturerName"]').val();
+
+            updateCourse(courseId, updatedCourseId, updatedCourseName, updatedLecturerName);
+        });
+
+        // Handle back to list button click
+        $('#back-to-list').click(function() {
+            window.location.href = '/list'; // Redirect back to the course list
+        });
+
+        // Function to update a course
+        function updateCourse(courseId, updatedCourseId, updatedCourseName, updatedLecturerName) {
+            $.ajax({
+                type: 'PUT',
+                url: `/updateCourse/${courseId}`,
+                data: {
+                    courseId: updatedCourseId,
+                    courseName: updatedCourseName,
+                    lecturerName: updatedLecturerName
+                },
+                success: function(response) {
+                    console.log('Course updated successfully');
+                    window.location.href = '/list'; // Redirect back to the course list
+                },
+                error: function() {
+                    console.log('Failed to update course');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
