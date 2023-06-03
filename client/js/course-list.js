@@ -4,36 +4,38 @@ $(document).ready(function() {
 
     // Handle add course button click
     $('#add-course').click(function() {
-        window.location.href = '/add_course'; // Redirect to the add course form
+        window.location.href = '/new'; // Redirect to the add course form
     });
 
     // Function to load the course list
     function loadCourseList() {
         $.ajax({
             type: 'GET',
-            url: '/getCourses',
+            url: '/courses/get-all',
             success: function(response) {
-                if (response.length > 0) {
+                if (Object.keys(response).length > 0) {
                     var courseList = '';
-                    response.forEach(function(course) {
+                    for (var courseId in response) {
+                        var course = response[courseId];
                         courseList += `
                             <div class="course">
                                 <div class="course-details">
-                                    <div>Course ID: ${course.courseId}</div>
-                                    <div>Course Name: ${course.courseName}</div>
-                                    <div>Lecturer's Name: ${course.lecturerName}</div>
-                                    <div>Start Date: ${course.startDate}</div>
-                                    <div>End Date: ${course.endDate}</div>
+                                    <div>Course ID: ${course.id}</div>
+                                    <div>Course Name: ${course.name}</div>
+                                    <div>Lecturer's Name: ${course.lecturer}</div>
+                                    <div>Start Date: ${course.start_date}</div>
+                                    <div>End Date: ${course.end_date}</div>
+                                    <div>Prerequisite Courses: ${course.prerequisite_course.join(', ')}</div>
                                 </div>
                                 <div class="course-actions">
-                                    <button class="edit-course" data-course-id="${course.courseId}">Edit</button>
-                                    <button class="delete-course" data-course-id="${course.courseId}">Delete</button>
-                                    <button class="add-student" data-course-id="${course.courseId}">Add Student</button>
-                                    <button class="view-students" data-course-id="${course.courseId}">View Students</button>
+                                    <button class="edit-course" data-course-id="${course.id}">Edit</button>
+                                    <button class="delete-course" data-course-id="${course.id}">Delete</button>
+                                    <button class="add-student" data-course-id="${course.id}">Add Student</button>
+                                    <button class="view-students" data-course-id="${course.id}">View Students</button>
                                 </div>
                             </div>
                         `;
-                    });
+                    }
                     $('#course-list').html(courseList);
                 } else {
                     $('#course-list').html('<p>No courses found.</p>');
@@ -73,7 +75,7 @@ $(document).ready(function() {
     function deleteCourse(courseId) {
         $.ajax({
             type: 'DELETE',
-            url: `/deleteCourse/${courseId}`,
+            url: `/courses/delete/${courseId}`,
             success: function(response) {
                 console.log('Course deleted successfully');
                 loadCourseList();
@@ -88,20 +90,21 @@ $(document).ready(function() {
     function loadStudentList(courseId) {
         $.ajax({
             type: 'GET',
-            url: `/getCourse/${courseId}`,
+            url: `/courses/get/${courseId}`,
             success: function(response) {
                 var studentList = '';
-                if (response.students.length > 0) {
-                    response.students.forEach(function(student) {
+                if (Object.keys(response.students).length > 0) {
+                    for (var studentId in response.students) {
+                        var student = response.students[studentId];
                         studentList += `
                             <div class="student">
-                                <div>Student ID: ${student.studentId}</div>
-                                <div>Student Name: ${student.studentName}</div>
+                                <div>Student ID: ${student.id}</div>
+                                <div>Student Name: ${student.name}</div>
                                 <div>Grade: ${student.grade}</div>
-                                <button class="delete-student" data-course-id="${courseId}" data-student-id="${student.studentId}">Delete</button>
+                                <button class="delete-student" data-course-id="${courseId}" data-student-id="${student.id}">Delete</button>
                             </div>
                         `;
-                    });
+                    }
                 } else {
                     studentList = '<p>No students found.</p>';
                 }
@@ -124,7 +127,7 @@ $(document).ready(function() {
     function deleteStudent(courseId, studentId) {
         $.ajax({
             type: 'DELETE',
-            url: `/deleteStudentFromCourse/${courseId}/${studentId}`,
+            url: `/courses/delete-student/${courseId}/${studentId}`,
             success: function(response) {
                 console.log('Student deleted successfully');
                 loadStudentList(courseId);

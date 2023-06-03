@@ -1,4 +1,6 @@
+
 # Courses Management System
+ 
 
 This project implements a Courses Management System, which allows the administration of courses, students, and grades. It consists of a full-stack application built with Node.js, Express.js, and jQuery.
 
@@ -25,6 +27,7 @@ This project implements a Courses Management System, which allows the administra
 
 1. Start the server: `npm start`
 2. Open a web browser and go to: `http://localhost:3001`
+3. routes are display in the guide page as buttons - the user can navigate easy through it
 
 ## Folder And File Structure
 - `server.js`: Entry point for the Node.js application
@@ -37,6 +40,7 @@ This project implements a Courses Management System, which allows the administra
 
 - `client/`: Contains the client-side code
   - `html/`: Contains HTML files 
+  - `guide.html`: localhost3001 default page  
   - `index.html`: Main HTML file for the web application
   - `add_new_course.html`: html file to add new course to the list 
   - `add_student_form.html`: html file to add new student
@@ -45,8 +49,13 @@ This project implements a Courses Management System, which allows the administra
   
   - `css/`: Contains CSS stylesheets
     - `style.css`: Custom styles for the application
+    - `guide.css`: localhost3001 default style for the page  
   - `js/`: Contains JavaScript files
-    - `script.js`: Client-side logic and AJAX calls
+    - `add-course.js`: Logic for adding a new course
+    - `add-student.js`: Logic for adding a new student
+    - `course-list.js`: Logic for loading and managing the course list
+    - `guide.js`: Logic for displaying the guide page
+    - `view-students.js`: Logic for viewing the list of students for a course
 
 ## API Routes
 
@@ -67,6 +76,3 @@ start the test:
 
 Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).

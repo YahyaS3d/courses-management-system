@@ -176,3 +176,39 @@ body {
     }
   }
   
+
+  #back {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add padding */
+    font-size: 16px; /* Increase font size */
+    cursor: pointer; /* Add pointer cursor on hover */
+    transition: background-color 0.3s; /* Add transition effect */
+  }
+  
+  #back:hover {
+    background-color: #45a049; /* Darker green background color on hover */
+  }
+  
+  #back:active {
+    background-color: #398439; /* Even darker green background color when button is clicked */
+  }
+
+  #add-course {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add padding */
+    font-size: 16px; /* Increase font size */
+    cursor: pointer; /* Add pointer cursor on hover */
+    transition: background-color 0.3s; /* Add transition effect */
+  }
+  
+  #add-course:hover {
+    background-color: #45a049; /* Darker green background color on hover */
+  }
+  
+  #add-course:active {
+    background-color: #398439; /* Even darker green background color when button is clicked */
+  }

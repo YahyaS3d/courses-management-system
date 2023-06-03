@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add New Course</title>
+    <title>Add Course</title>
     <link rel="stylesheet" href="/css/styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/add-course.js"></script>
 </head>
 <body>
-    <h1>Add New Course</h1>
+    <h1>Add Course</h1>
     <form id="add-course-form">
         <input type="text" name="courseId" placeholder="Course ID" required>
         <input type="text" name="courseName" placeholder="Course Name" required>
-        <input type="text" name="lecturerName" placeholder="Lecturer's Name" required>
+        <input type="text" name="lecturerName" placeholder="Lecturer Name" required>
+        <input type="text" name="startDate" placeholder="Start Date (MM-DD-YYYY)" required>
+        <input type="text" name="endDate" placeholder="End Date (MM-DD-YYYY)" required>
+        <input type="text" name="prerequisiteCourses" placeholder="Prerequisite Courses (comma-separated)">
         <button type="submit">Add Course</button>
     </form>
-    <button id="back-to-list">Back to Course List</button>
+    <button id="back">Back to Course List</button>
 </body>
 </html>

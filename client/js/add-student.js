@@ -13,7 +13,7 @@ $(document).ready(function() {
     });
 
     // Handle back to list button click
-    $('#back-to-list').click(function() {
+    $('#back').click(function() {
         window.location.href = '/list'; // Redirect back to the course list
     });
 
@@ -21,10 +21,10 @@ $(document).ready(function() {
     function addStudent(courseId, studentId, studentName, grade) {
         $.ajax({
             type: 'POST',
-            url: `/addStudentToCourse/${courseId}`,
+            url: `/courses/add-student/${courseId}`,
             data: {
-                studentId: studentId,
-                studentName: studentName,
+                id: studentId,
+                name: studentName,
                 grade: grade
             },
             success: function(response) {

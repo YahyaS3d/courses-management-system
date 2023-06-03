@@ -5,7 +5,7 @@ $(document).ready(function() {
     loadStudentList(courseId);
 
     // Handle back to list button click
-    $('#back-to-list').click(function() {
+    $('#back').click(function() {
         window.location.href = '/list'; // Redirect back to the course list
     });
 
@@ -13,7 +13,7 @@ $(document).ready(function() {
     function loadStudentList(courseId) {
         $.ajax({
             type: 'GET',
-            url: `/getCourse/${courseId}`,
+            url: '/courses/get/' + courseId,
             success: function(response) {
                 var studentList = '';
                 if (response.students.length > 0) {
@@ -49,7 +49,7 @@ $(document).ready(function() {
     function deleteStudent(courseId, studentId) {
         $.ajax({
             type: 'DELETE',
-            url: `/deleteStudentFromCourse/${courseId}/${studentId}`,
+            url: '/courses/delete-student/' + courseId + '/' + studentId,
             success: function(response) {
                 console.log('Student deleted successfully');
                 loadStudentList(courseId);

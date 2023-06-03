@@ -14,7 +14,7 @@
         <input type="text" name="lecturerName" placeholder="Lecturer's Name" required>
         <button type="submit">Update Course</button>
     </form>
-    <button id="back-to-list">Back to Course List</button>
+    <button id="back">Back to Course List</button>
 
     <script>
         var courseId = window.location.pathname.split('/').pop();
@@ -45,7 +45,7 @@
         });
 
         // Handle back to list button click
-        $('#back-to-list').click(function() {
+        $('#back').click(function() {
             window.location.href = '/list'; // Redirect back to the course list
         });
 
