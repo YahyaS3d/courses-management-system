@@ -8,7 +8,7 @@ This project implements a Courses Management System, which allows the administra
 
 - Create, read, update, and delete (CRUD) operations for courses
 - Add students to courses and manage their grades
-- View course details and lists of students
+- View course details and lists of student
 - Delete courses and students from the system
 
 ## Requirements
